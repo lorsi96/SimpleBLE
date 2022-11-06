@@ -2,7 +2,7 @@
 #include <simplebluez/ProxyOrg.h>
 #include <simpledbus/interfaces/ObjectManager.h>
 
-#include <iostream>
+#include <fmt/core.h>
 
 using namespace SimpleBluez;
 
@@ -37,7 +37,7 @@ void Bluez::init() {
         path_add(path, managed_interfaces);
     }
 
-    _conn->add_match("type='signal',sender='org.bluez'");
+    //_conn->add_match("sender='org.bluez'");
 
     // Create the agent that will handle pairing.
     _agent = std::make_shared<Agent>(_conn, "org.bluez", "/agent");
@@ -48,6 +48,7 @@ void Bluez::run_async() {
     _conn->read_write();
     SimpleDBus::Message message = _conn->pop_message();
     while (message.is_valid()) {
+        fmt::print("Message received: {}\n", message.to_string());
         message_forward(message);
         message = _conn->pop_message();
     }

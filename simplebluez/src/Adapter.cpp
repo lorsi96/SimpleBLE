@@ -39,11 +39,17 @@ bool Adapter::discovering() { return adapter1()->Discovering(); }
 
 bool Adapter::powered() { return adapter1()->Powered(); }
 
+bool Adapter::discoverable() { return adapter1()->Discoverable(); }
+
 void Adapter::discovery_filter(const DiscoveryFilter& filter) { adapter1()->SetDiscoveryFilter(filter); }
 
 void Adapter::discovery_start() { adapter1()->StartDiscovery(); }
 
 void Adapter::discovery_stop() { adapter1()->StopDiscovery(); }
+
+void Adapter::set_discoverable_timeout(uint32_t timeout) { adapter1()->DiscoverableTimeout(timeout);}
+
+uint32_t Adapter::get_discoverable_timeout() { return adapter1()->DiscoverableTimeout();};
 
 std::shared_ptr<Device> Adapter::device_get(const std::string& path) {
     return std::dynamic_pointer_cast<Device>(path_get(path));

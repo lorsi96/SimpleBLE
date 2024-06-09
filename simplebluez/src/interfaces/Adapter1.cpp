@@ -97,6 +97,27 @@ bool Adapter1::Discovering(bool refresh) {
     return _properties["Discovering"].get_boolean();
 }
 
+bool Adapter1::Discoverable(bool refresh) {
+    if (refresh) {
+        property_refresh("Discoverable");
+    }
+    std::scoped_lock lock(_property_update_mutex);
+    return _properties["Discoverable"].get_boolean();
+}
+
+uint32_t Adapter1::DiscoverableTimeout() {
+    property_refresh("DiscoverableTimeout");
+    std::scoped_lock lock(_property_update_mutex);
+    return _properties["DiscoverableTimeout"].get_uint32();
+}
+
+uint32_t Adapter1::DiscoverableTimeout(uint32_t timeout) {
+    std::scoped_lock lock(_property_update_mutex);
+    property_set("DiscoverableTimeout", 
+        SimpleDBus::Holder::create_uint32(timeout));
+    return _properties["DiscoverableTimeout"].get_uint32();
+}
+
 bool Adapter1::Powered(bool refresh) {
     if (refresh) {
         property_refresh("Powered");

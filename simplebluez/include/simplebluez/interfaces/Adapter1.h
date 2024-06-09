@@ -34,7 +34,11 @@ class Adapter1 : public SimpleDBus::Interface {
     SimpleDBus::Holder GetDiscoveryFilters();
 
     // ----- PROPERTIES -----
+    uint32_t DiscoverableTimeout();
+    uint32_t DiscoverableTimeout(uint32_t timeout);
+
     bool Discovering(bool refresh = true);
+    bool Discoverable(bool refresh = true);
     bool Powered(bool refresh = true);
     std::string Address();
 

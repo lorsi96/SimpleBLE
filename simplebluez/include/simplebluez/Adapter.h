@@ -20,6 +20,7 @@ class Adapter : public SimpleDBus::Proxy {
     std::string address();
     bool discovering();
     bool powered();
+    bool discoverable();
 
     void discovery_filter(const DiscoveryFilter& filter);
     void discovery_start();
@@ -29,6 +30,9 @@ class Adapter : public SimpleDBus::Proxy {
     void device_remove(const std::string& path);
     void device_remove(const std::shared_ptr<Device>& device);
     std::vector<std::shared_ptr<Device>> device_paired_get();
+
+    void set_discoverable_timeout(uint32_t timeout);
+    uint32_t get_discoverable_timeout();
 
     void set_on_device_updated(std::function<void(std::shared_ptr<Device> device)> callback);
     void clear_on_device_updated();

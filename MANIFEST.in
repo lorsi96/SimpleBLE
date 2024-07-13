@@ -110,6 +110,7 @@ include simplebluez/include/simplebluez/interfaces/Device1.h
 include simplebluez/include/simplebluez/interfaces/GattCharacteristic1.h
 include simplebluez/include/simplebluez/interfaces/GattDescriptor1.h
 include simplebluez/include/simplebluez/interfaces/GattService1.h
+include simplebluez/include/simplebluez/interfaces/LEAdvertisingManager1.h
 include simplebluez/src/Adapter.cpp
 include simplebluez/src/Agent.cpp
 include simplebluez/src/Bluez.cpp
@@ -130,6 +131,7 @@ include simplebluez/src/interfaces/Device1.cpp
 include simplebluez/src/interfaces/GattCharacteristic1.cpp
 include simplebluez/src/interfaces/GattDescriptor1.cpp
 include simplebluez/src/interfaces/GattService1.cpp
+include simplebluez/src/interfaces/LEAdvertisingManager1.cpp
 include simpledbus/CMakeLists.txt
 include simpledbus/cmake/simpledbus.pc.in
 include simpledbus/include/simpledbus/advanced/Interface.h

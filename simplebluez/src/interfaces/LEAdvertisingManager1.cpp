@@ -27,37 +27,4 @@ void LEAdvertisingManager1::UnregisterAdvertisement(std::string advertisement_pa
     _conn->send_with_reply_and_block(msg);
 }
 
-uint8_t LEAdvertisingManager1::ActiveInstances(bool refresh) {
-    if (refresh) {
-        property_refresh("ActiveInstances");
-    }
-
-    std::scoped_lock lock(_property_update_mutex);
-    return _properties["ActiveInstances"].get_byte();
-}
-
-uint8_t LEAdvertisingManager1::SupportedInstances(bool refresh) {
-    if (refresh) {
-        property_refresh("SupportedInstances");
-    }
-
-    std::scoped_lock lock(_property_update_mutex);
-    return _properties["SupportedInstances"].get_byte();
-}
-
-std::vector<std::string> LEAdvertisingManager1::SupportedIncludes(bool refresh) {
-    if (refresh) {
-        property_refresh("SupportedIncludes");
-    }
-
-    std::scoped_lock lock(_property_update_mutex);
-    std::vector<std::string> result;
-    for (auto& item : _properties["SupportedIncludes"].get_array()) {
-        result.push_back(item.get_string());
-    }
-
-    return result;
-}
-
-
 void LEAdvertisingManager1::property_changed(std::string option_name) {}

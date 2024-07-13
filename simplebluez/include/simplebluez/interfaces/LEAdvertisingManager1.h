@@ -1,6 +1,7 @@
 #pragma once
 
 #include <simpledbus/advanced/Interface.h>
+#include <simpledbus/advanced/Property.h>
 
 #include <optional>
 #include <string>
@@ -23,9 +24,9 @@ class LEAdvertisingManager1 : public SimpleDBus::Interface {
 
 
     // ----- PROPERTIES -----
-    uint8_t ActiveInstances(bool refresh = true);
-    uint8_t SupportedInstances(bool refresh = true);
-    std::vector<std::string> SupportedIncludes(bool refresh = true);
+    SimpleDBus::Property<uint8_t> ActiveInstances = create_property<uint8_t>("ActiveInstances");
+    SimpleDBus::Property<uint8_t> SupportedInstances = create_property<uint8_t>("SupportedInstances");
+    SimpleDBus::Property<std::vector<std::string>> SupportedIncludes = create_property<std::vector<std::string>>("SupportedIncludes");
 
   protected:
     void property_changed(std::string option_name) override;

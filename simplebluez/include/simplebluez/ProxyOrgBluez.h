@@ -4,6 +4,7 @@
 
 #include <simplebluez/Adapter.h>
 #include <simplebluez/Agent.h>
+#include <simplebluez/Advertisement.h>
 
 #include <simplebluez/interfaces/AgentManager1.h>
 
@@ -15,6 +16,7 @@ class ProxyOrgBluez : public SimpleDBus::Proxy {
     virtual ~ProxyOrgBluez() = default;
 
     void register_agent(std::shared_ptr<Agent> agent);
+    void register_advertisement(std::shared_ptr<Advertisement> advertisement);
 
     std::vector<std::shared_ptr<Adapter>> get_adapters();
 

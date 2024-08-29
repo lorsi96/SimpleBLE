@@ -5,6 +5,7 @@
 #include <simplebluez/Device.h>
 #include <simplebluez/interfaces/Adapter1.h>
 #include <simplebluez/interfaces/LEAdvertisingManager1.h>
+#include <simplebluez/interfaces/LEAdvertisement1.h>
 
 #include <functional>
 
@@ -37,6 +38,9 @@ class Adapter : public SimpleDBus::Proxy {
     void register_advertisement(const std::string& path);
     void unregister_advertisement(const std::string& path);
 
+
+    // TODO: Make private once done debugging.
+    std::shared_ptr<LEAdvertisement1> le_advertisement1();
   private:
     std::shared_ptr<SimpleDBus::Proxy> path_create(const std::string& path) override;
     std::shared_ptr<SimpleDBus::Interface> interfaces_create(const std::string& interface_name) override;

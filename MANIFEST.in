@@ -93,6 +93,7 @@ include simplebluez/CMakeLists.txt
 include simplebluez/cmake/simplebluez.pc.in
 include simplebluez/include/simplebluez/Adapter.h
 include simplebluez/include/simplebluez/Agent.h
+include simplebluez/include/simplebluez/Advertisement.h
 include simplebluez/include/simplebluez/Bluez.h
 include simplebluez/include/simplebluez/Characteristic.h
 include simplebluez/include/simplebluez/Descriptor.h
@@ -111,7 +112,9 @@ include simplebluez/include/simplebluez/interfaces/GattCharacteristic1.h
 include simplebluez/include/simplebluez/interfaces/GattDescriptor1.h
 include simplebluez/include/simplebluez/interfaces/GattService1.h
 include simplebluez/include/simplebluez/interfaces/LEAdvertisingManager1.h
+include simplebluez/include/simplebluez/interfaces/LEAdvertisement1.h
 include simplebluez/src/Adapter.cpp
+include simplebluez/src/Advertisement.cpp
 include simplebluez/src/Agent.cpp
 include simplebluez/src/Bluez.cpp
 include simplebluez/src/Characteristic.cpp

@@ -40,6 +40,7 @@ set(SIMPLEBLUEZ_INCLUDE
 set(SIMPLEBLUEZ_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ProxyOrg.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Logging.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Advertisement.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Agent.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Device.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Characteristic.cpp
@@ -58,6 +59,7 @@ set(SIMPLEBLUEZ_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces/GattDescriptor1.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces/GattService1.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces/LEAdvertisingManager1.cpp  
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces/LEAdvertisement1.cpp  
     ${CMAKE_CURRENT_SOURCE_DIR}/../simpledbus/src/advanced/Interface.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../simpledbus/src/advanced/Property.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../simpledbus/src/advanced/Proxy.cpp

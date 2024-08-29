@@ -32,6 +32,12 @@ int main(int argc, char* argv[]) {
 
     auto adapters = bluez.get_adapters();
     auto adapter = adapters[0];
+    auto advertisement = adapter->le_advertisement1();
+
+    advertisement->Type.set("peripheral");
+    advertisement->Discoverable.set(true);
+    advertisement->ServiceUUIDs.set({"00000001-0000-1000-8000-00805f9b34fb"});
+    // advertisement->ManufacturerData.set({{0x1234, {0x01, 0x02, 0x03, 0x04}}});
 
     adapter->register_advertisement("/potato");
 

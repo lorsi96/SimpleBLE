@@ -31,6 +31,7 @@ class Property<std::vector<K>> {
 
     virtual std::vector<K> get(); 
     virtual std::vector<K> refresh_and_get();
+    virtual void set(std::vector<K> value);
 
   protected:
     Interface& _interface; 

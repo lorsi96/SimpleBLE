@@ -1,0 +1,10 @@
+We need
+* LEAdvertisment1
+* LEAdvertismentManager1 -> Already done by kevin
+* Register the Advertisement
+* Become discoverabe?
+
+
+-- Notes --
+Debugging:
+  * gdbus introspect -y -d "org.bluez" -o "/org/bluez/hci0

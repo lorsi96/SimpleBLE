@@ -33,6 +33,20 @@ std::vector<K> Property<std::vector<K>>::refresh_and_get() {
     return get();
 }
 
+
+template<>
+void Property<std::vector<std::string>>::set(std::vector<std::string> value) {
+    std::scoped_lock lock(_interface._property_update_mutex);
+    SimpleDBus::Holder holder_array = Holder::create_array();
+    for (const auto& val: value) {
+        SimpleDBus::Holder tmp;
+        tmp.create_string(val.c_str());
+        holder_array.array_append(tmp);
+    }
+    _interface.property_set(_name, holder_array);
+}
+
+
 template<typename K, typename V>
 Property<std::map<K, std::vector<V>>>::Property(Interface& interface, std::string name) : _interface(interface), _name(name) {}
 

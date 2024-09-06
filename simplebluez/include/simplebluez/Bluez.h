@@ -22,6 +22,7 @@ class Bluez : public SimpleDBus::Proxy {
 
     std::vector<std::shared_ptr<Adapter>> get_adapters();
     std::shared_ptr<Agent> get_agent();
+    std::shared_ptr<Advertisement> get_advertisement();
     void register_agent();
     void register_advertisement();
 

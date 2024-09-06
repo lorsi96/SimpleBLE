@@ -1,5 +1,6 @@
 #include <simpledbus/advanced/Interface.h>
 #include <simpledbus/base/Exceptions.h>
+#include <iostream>
 
 using namespace SimpleDBus;
 

@@ -39,7 +39,15 @@ int main(int argc, char* argv[]) {
     advertisement->ServiceUUIDs.set({"00000001-0000-1000-8000-00805f9b34fb"});
     // advertisement->ManufacturerData.set({{0x1234, {0x01, 0x02, 0x03, 0x04}}});
 
-    adapter->register_advertisement("/potato");
+    auto advertisement = bluez.get_advertisement();
+    bluez.register_advertisement();
+
+    // advertisement->test_configure();
+
+
+    // advertisement->ManufacturerData.set({{0x1234, {0x01, 0x02, 0x03, 0x04}}});
+
+    // adapter->register_advertisement("/potato");
 
     millisecond_delay(25000);
 

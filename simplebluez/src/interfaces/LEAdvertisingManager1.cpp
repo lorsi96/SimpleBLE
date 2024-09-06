@@ -1,6 +1,7 @@
 #include "simplebluez/interfaces/LEAdvertisingManager1.h"
 
 #include <fmt/core.h>
+#include <iostream>
 
 using namespace SimpleBluez;
 
@@ -14,7 +15,7 @@ void LEAdvertisingManager1::RegisterAdvertisement(std::string advertisement_path
     SimpleDBus::Holder properties = SimpleDBus::Holder::create_dict();
 
     // NOTE: The current documentation doesn't specify any options. Using a placeholder for now.
-
+    std::cout << "Register Advertisement: " << advertisement_path << "\n";
     auto msg = create_method_call("RegisterAdvertisement");
     msg.append_argument(SimpleDBus::Holder::create_object_path(advertisement_path), "o");
     msg.append_argument(properties, "a{sv}");

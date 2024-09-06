@@ -16,7 +16,7 @@ void ProxyOrg::register_agent(std::shared_ptr<Agent> agent) {
 
 
 void ProxyOrg::register_advertisement(std::shared_ptr<Advertisement> advertisement) {
-    std::dynamic_pointer_cast<ProxyOrgBluez>(path_get("/org/bluez"))->register_agent(advertisement);
+    std::dynamic_pointer_cast<ProxyOrgBluez>(path_get("/org/bluez"))->register_advertisement(advertisement);
 }
 
 std::shared_ptr<SimpleDBus::Proxy> ProxyOrg::path_create(const std::string& path) {

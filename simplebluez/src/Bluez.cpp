@@ -1,6 +1,7 @@
 #include <simplebluez/Bluez.h>
 #include <simplebluez/ProxyOrg.h>
 #include <simpledbus/interfaces/ObjectManager.h>
+#include <iostream>
 
 #include <fmt/core.h>
 
@@ -41,7 +42,9 @@ void Bluez::init() {
 
     // Create the agent that will handle pairing.
     _agent = std::make_shared<Agent>(_conn, "org.bluez", "/agent");
+    _advertisement = std::make_shared<Advertisement>(_conn, "org.bluez", "/advertisement");
     path_append_child("/agent", std::static_pointer_cast<SimpleDBus::Proxy>(_agent));
+    path_append_child("/advertisement", std::static_pointer_cast<SimpleDBus::Proxy>(_advertisement));
 }
 
 void Bluez::run_async() {
@@ -60,9 +63,15 @@ std::vector<std::shared_ptr<Adapter>> Bluez::get_adapters() {
 
 std::shared_ptr<Agent> Bluez::get_agent() { return std::dynamic_pointer_cast<Agent>(path_get("/agent")); }
 
+std::shared_ptr<Advertisement> Bluez::get_advertisement() { return std::dynamic_pointer_cast<Advertisement>(path_get("/advertisement")); }
+
 void Bluez::register_agent() { std::dynamic_pointer_cast<ProxyOrg>(path_get("/org"))->register_agent(_agent); }
 
-void Bluez::register_advertisement() { std::dynamic_pointer_cast<ProxyOrg>(path_get("/org"))->register_advertisement(_advertisement); }
+void Bluez::register_advertisement() { 
+    std::cout << "Registering advertisement\n"; 
+    std::dynamic_pointer_cast<ProxyOrg>(path_get("/org"))->register_advertisement(_advertisement); 
+    std::cout << "Registering advertisement II\n"; 
+}
 
 
 std::shared_ptr<SimpleDBus::Proxy> Bluez::path_create(const std::string& path) {

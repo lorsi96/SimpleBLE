@@ -15,7 +15,6 @@ class ProxyOrg : public SimpleDBus::Proxy {
 
     std::vector<std::shared_ptr<Adapter>> get_adapters();
     void register_agent(std::shared_ptr<Agent> agent);
-    void register_advertisement(std::shared_ptr<Advertisement> advertisement);
 
   private:
     std::shared_ptr<SimpleDBus::Proxy> path_create(const std::string& path) override;

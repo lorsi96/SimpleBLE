@@ -84,9 +84,9 @@ T Property<T>::refresh_and_get() {
 template<typename T>
 void Property<T>::set(T value) {
     std::scoped_lock lock(_interface._property_update_mutex);
-    std::cout << "B4 Property " << _name << " set to " << value << std::endl;
+    std::cout << "B4 Property [" << _name << "] set to " << value << std::endl;
     _interface.property_set(_name, SimpleDBus::Holder::create<T>(value));
-    std::cout << "After Property " << _name << " set to " << value << std::endl;
+    std::cout << "After Property [" << _name << "] set to " << value << std::endl;
 }
 
 

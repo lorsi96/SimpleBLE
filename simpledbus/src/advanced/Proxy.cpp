@@ -3,6 +3,7 @@
 #include <simpledbus/base/Exceptions.h>
 #include <simpledbus/base/Path.h>
 #include <algorithm>
+#include <iostream>
 
 using namespace SimpleDBus;
 
@@ -41,6 +42,12 @@ std::string Proxy::introspect() {
 
 bool Proxy::interface_exists(const std::string& name) {
     std::scoped_lock lock(_interface_access_mutex);
+    // Print all interfaces
+    std::cout << "Looking for interface: " << name << std::endl;
+    std::cout << "Interfaces:" << std::endl;
+    for (auto& [iface_name, interface] : _interfaces) {
+        std::cout << iface_name << std::endl;
+    }
     return _interfaces.find(name) != _interfaces.end();
 }
 
@@ -239,8 +246,10 @@ void Proxy::path_append_child(const std::string& path, std::shared_ptr<Proxy> ch
 void Proxy::message_forward(Message& msg) {
     // If the message is for the current proxy, then forward it to the message handler.
     if (msg.get_path() == _path) {
+        std::cout << "Handling " << msg.get_path() << std::endl;
         // If the message is involves a property change, forward it to the correct interface.
         if (msg.is_signal("org.freedesktop.DBus.Properties", "PropertiesChanged")) {
+            std::cout << "PropertiesChanged" << std::endl;
             Holder interface_h = msg.extract();
             std::string iface_name = interface_h.get_string();
             msg.extract_next();
@@ -250,12 +259,15 @@ void Proxy::message_forward(Message& msg) {
 
             // If the interface is not loaded, then ignore the message.
             if (!interface_exists(iface_name)) {
+                std::cout << "Interface not loaded" << std::endl;
                 return;
             }
 
+            std::cout << "Signaling property changed " << iface_name << std::endl;
             interface_get(iface_name)->signal_property_changed(changed_properties, invalidated_properties);
 
         } else if (interface_exists(msg.get_interface())) {
+            std::cout << "Forwarding to message handle " << msg.get_interface() << std::endl;
             interface_get(msg.get_interface())->message_handle(msg);
         }
 
@@ -264,15 +276,19 @@ void Proxy::message_forward(Message& msg) {
 
     // If the message is for a child proxy or a descendant, forward it to that child proxy.
     for (auto& [child_path, child] : _children) {
+        std::cout << "Checking " << child_path << " vs " << msg.get_path() << std::endl;
         if (child_path == msg.get_path()) {
+            std::cout << "Forwarding to " << child_path << std::endl;
             child->message_forward(msg);
 
             if (msg.get_type() == Message::Type::SIGNAL) {
+                std::cout << "Signal received" << std::endl;
                 on_child_signal_received(child_path);
             }
 
             return;
         } else if (Path::is_descendant(child_path, msg.get_path())) {
+            std::cout << "Forwarding to descendent " << child_path << std::endl;
             child->message_forward(msg);
             return;
         }

@@ -32,26 +32,18 @@ int main(int argc, char* argv[]) {
 
     auto adapters = bluez.get_adapters();
     auto adapter = adapters[0];
-    auto advertisement = adapter->le_advertisement1();
-
-    advertisement->Type.set("peripheral");
-    advertisement->Discoverable.set(true);
-    advertisement->ServiceUUIDs.set({"00000001-0000-1000-8000-00805f9b34fb"});
-    // advertisement->ManufacturerData.set({{0x1234, {0x01, 0x02, 0x03, 0x04}}});
 
     auto advertisement = bluez.get_advertisement();
-    bluez.register_advertisement();
+    adapter->register_advertisement(advertisement->path());
 
+    std::cout << "Before test configure | After register Advertisement" << std::endl;
+    std::cout << "After test configure" << std::endl;
+
+    // millisecond_delay(25000);
+
+    std::cout << "Enter to test configure" << std::endl;
+    std::cin.get();
     // advertisement->test_configure();
-
-
-    // advertisement->ManufacturerData.set({{0x1234, {0x01, 0x02, 0x03, 0x04}}});
-
-    // adapter->register_advertisement("/potato");
-
-    millisecond_delay(25000);
-
-    std::cout << "Done" << std::endl;
 
     async_thread_active = false;
     while (!async_thread->joinable()) {
@@ -59,6 +51,8 @@ int main(int argc, char* argv[]) {
     }
     async_thread->join();
     delete async_thread;
+
+    std::cin.get();
 
     return 0;
 }

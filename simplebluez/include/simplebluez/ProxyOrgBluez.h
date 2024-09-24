@@ -17,7 +17,6 @@ class ProxyOrgBluez : public SimpleDBus::Proxy {
     virtual ~ProxyOrgBluez() = default;
 
     void register_agent(std::shared_ptr<Agent> agent);
-    void register_advertisement(std::shared_ptr<Advertisement> advertisement);
 
     std::vector<std::shared_ptr<Adapter>> get_adapters();
 
@@ -25,7 +24,6 @@ class ProxyOrgBluez : public SimpleDBus::Proxy {
     std::shared_ptr<SimpleDBus::Proxy> path_create(const std::string& path) override;
     std::shared_ptr<SimpleDBus::Interface> interfaces_create(const std::string& interface_name) override;
     std::shared_ptr<AgentManager1> agentmanager1();
-    std::shared_ptr<LEAdvertisingManager1> leadvertisingmanager1();
 };
 
 }  // namespace SimpleBluez

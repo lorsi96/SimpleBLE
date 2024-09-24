@@ -43,6 +43,8 @@ class LEAdvertisement1 : public SimpleDBus::Interface {
 
   protected:
     void property_changed(std::string option_name) override;
+    void message_handle(SimpleDBus::Message& msg) override;
+    void reply_error(SimpleDBus::Message& msg, const std::string& error_name, const std::string& error_message);
 };
 
 }  // namespace SimpleBluez

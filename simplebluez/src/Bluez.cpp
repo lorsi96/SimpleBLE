@@ -67,12 +67,6 @@ std::shared_ptr<Advertisement> Bluez::get_advertisement() { return std::dynamic_
 
 void Bluez::register_agent() { std::dynamic_pointer_cast<ProxyOrg>(path_get("/org"))->register_agent(_agent); }
 
-void Bluez::register_advertisement() { 
-    std::cout << "Registering advertisement\n"; 
-    std::dynamic_pointer_cast<ProxyOrg>(path_get("/org"))->register_advertisement(_advertisement); 
-    std::cout << "Registering advertisement II\n"; 
-}
-
 
 std::shared_ptr<SimpleDBus::Proxy> Bluez::path_create(const std::string& path) {
     auto child = std::make_shared<ProxyOrg>(_conn, _bus_name, path);

@@ -24,7 +24,6 @@ class Bluez : public SimpleDBus::Proxy {
     std::shared_ptr<Agent> get_agent();
     std::shared_ptr<Advertisement> get_advertisement();
     void register_agent();
-    void register_advertisement();
 
   private:
     std::shared_ptr<SimpleDBus::Proxy> path_create(const std::string& path) override;
